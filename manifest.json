@@ -1,0 +1,11 @@
+{
+  "name": "ASCII Image Generator",
+  "id": "ascii-image-generator",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "menu": [
+    {"name": "Generate ASCII Art", "command": "generate"}
+  ]
+}
