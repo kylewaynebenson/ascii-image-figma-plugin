@@ -124,9 +124,9 @@ figma.ui.onmessage = (msg) => __awaiter(this, void 0, void 0, function* () {
             // Create text node with ASCII art
             const textNode = figma.createText();
             // Load a monospace font
-            yield figma.loadFontAsync({ family: "Roboto Mono", style: "Regular" });
+            yield figma.loadFontAsync({ family: "IBM Plex Mono", style: "Regular" });
             // Set text properties
-            textNode.fontName = { family: "Roboto Mono", style: "Regular" };
+            textNode.fontName = { family: "IBM Plex Mono", style: "Regular" };
             textNode.textAlignHorizontal = "LEFT";
             textNode.textAlignVertical = "TOP";
             // Apply the calculated font size to maintain proportions
@@ -142,8 +142,8 @@ figma.ui.onmessage = (msg) => __awaiter(this, void 0, void 0, function* () {
             // Apply color from hex
             const rgbColor = hexToRgb(settings.textColor);
             textNode.fills = [{ type: 'SOLID', color: rgbColor }];
-            // Position text node near original image
-            textNode.x = imageNode.x + imageNode.width + 20;
+            // Position text node 100px to the right of the original image (changed from 20px)
+            textNode.x = imageNode.x + imageNode.width + 100;
             textNode.y = imageNode.y;
             // Add to current page
             figma.currentPage.appendChild(textNode);

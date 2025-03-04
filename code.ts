@@ -141,10 +141,10 @@ figma.ui.onmessage = async (msg) => {
       const textNode = figma.createText();
       
       // Load a monospace font
-      await figma.loadFontAsync({ family: "Roboto Mono", style: "Regular" });
+      await figma.loadFontAsync({ family: "IBM Plex Mono", style: "Regular" });
       
       // Set text properties
-      textNode.fontName = { family: "Roboto Mono", style: "Regular" };
+      textNode.fontName = { family: "IBM Plex Mono", style: "Regular" };
       textNode.textAlignHorizontal = "LEFT";
       textNode.textAlignVertical = "TOP";
       
@@ -166,8 +166,8 @@ figma.ui.onmessage = async (msg) => {
       const rgbColor = hexToRgb(settings.textColor);
       textNode.fills = [{ type: 'SOLID', color: rgbColor }];
 
-      // Position text node near original image
-      textNode.x = imageNode.x + imageNode.width + 20;
+      // Position text node 100px to the right of the original image (changed from 20px)
+      textNode.x = imageNode.x + imageNode.width + 100;
       textNode.y = imageNode.y;
       
       // Add to current page

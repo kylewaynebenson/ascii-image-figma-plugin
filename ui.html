@@ -52,6 +52,19 @@
       font-size: 12px;
       cursor: pointer;
     }
+
+    .select-style {
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 8px;
+    font-size: 12px;
+    background-color: white;
+    width: 100%;
+  }
+  
+  .margin-top {
+    margin-top: 8px;
+  }
     
     #generate {
       background-color: #18A0FB;
@@ -89,8 +102,15 @@
     </div>
     
     <div class="field-container">
-      <label for="chars">ASCII Characters (dark to light):</label>
-      <input type="text" id="chars" value="@%#*+=-.  ">
+      <label for="chars">ASCII Characters:</label>
+      <select id="charPreset" class="select-style">
+        <option value="custom">Custom</option>
+        <option value="standard">Standard (@%#*+=-.  )</option>
+        <option value="blocks">Block Elements (█▓▒░ )</option>
+        <option value="shades">Gradient Blocks (█▉▊▋▌▍▎▏)</option>
+        <option value="lines">Horizontal Lines (█▇▆▅▄▃▂▁)</option>
+      </select>
+      <input type="text" id="chars" value="@%#*+=-.  " class="margin-top">
     </div>
     
     <div id="previewContainer" class="hidden">
@@ -118,12 +138,31 @@
     // UI elements
     const columnsInput = document.getElementById('columns');
     const charsInput = document.getElementById('chars');
-    const widthInput = document.getElementById('width'); // Add width input
-    const textColorInput = document.getElementById('text-color'); // Add to your UI element definitions
+    const charPresetSelect = document.getElementById('charPreset');
+    const widthInput = document.getElementById('width');
+    const textColorInput = document.getElementById('text-color');
     const generateButton = document.getElementById('generate');
     const cancelButton = document.getElementById('cancel');
     const previewContainer = document.getElementById('previewContainer');
     const previewElement = document.getElementById('preview');
+    
+    // Character presets
+    const charPresets = {
+      custom: '',  // Custom will keep whatever is already there
+      standard: '@%#*+=-.  ',
+      blocks: '█▓▒░ ',
+      shades: '█▉▊▋▌▍▎▏',
+      lines: '█▇▆▅▄▃▂▁'
+    };
+    
+    // Handle preset selection change
+    charPresetSelect.addEventListener('change', function() {
+      const selectedValue = this.value;
+      
+      if (selectedValue !== 'custom') {
+        charsInput.value = charPresets[selectedValue];
+      }
+    });
     
     // Consolidate message handlers - handle all incoming messages in one place
     window.onmessage = (event) => {
@@ -132,8 +171,20 @@
       if (message.type === 'init') {
         // Update UI with stored preferences
         if (message.columns) columnsInput.value = message.columns;
-        if (message.chars) charsInput.value = message.chars;
-        if (message.width) widthInput.value = message.width; // Add width
+        if (message.chars) {
+          charsInput.value = message.chars;
+          // Try to match with a preset
+          let found = false;
+          for (const [key, value] of Object.entries(charPresets)) {
+            if (value === message.chars) {
+              charPresetSelect.value = key;
+              found = true;
+              break;
+            }
+          }
+          if (!found) charPresetSelect.value = 'custom';
+        }
+        if (message.width) widthInput.value = message.width;
         if (message.textColor) textColorInput.value = message.textColor;
       } else if (message.type === 'preview') {
         // Show preview
