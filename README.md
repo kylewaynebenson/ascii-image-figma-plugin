@@ -10,17 +10,16 @@ Convert images into ASCII art directly within Figma.
 
 ## Installation
 
-1. Download the plugin from the Figma Community.
-2. Open Figma and go to `Plugins` > `Manage Plugins`.
-3. Click on `Import Plugin` and select the downloaded file.
+1. Download or clone the repo
+2. Go to `Plugins & Widgets`, select `Development` from the dropdown.
+3. Select `Import from manifest...`
 4. The plugin will now be available in your plugins list.
 
 ## Usage
 
-1. Open your Figma project.
-2. Go to `Plugins` > `ASCII Image Figma Plugin`.
-3. Select the image or group you want to convert.
-5. Adjust settings, click `Generate`
+1. Go to `Plugins` > `ASCII Image Figma Plugin`.
+2. Select the image or group you want to convert.
+3. Adjust settings, click `Generate`
 
 ## Acknowledgements
 
