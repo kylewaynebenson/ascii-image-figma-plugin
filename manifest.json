@@ -1,6 +1,6 @@
 {
   "name": "ASCII Image Generator",
-  "id": "ascii-image-generator",
+  "id": "ascii-image-figma-plugin",
   "api": "1.0.0",
   "main": "code.js",
   "ui": "ui.html",
